@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+# KiCad backups and lock files, should a library be edited in place
+*.bak
+*-backups/
+~*.lck

@@ -1,0 +1,3 @@
+#!/bin/sh
+# kcli ARGS...  = kicad-cli on this machine (resolved by kenv.sh / the kicad-env-* skill)
+S=$(cd "$(dirname "$0")" && pwd); . "$S/kenv.sh"; kcli "$@"

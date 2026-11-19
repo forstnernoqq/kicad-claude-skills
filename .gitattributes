@@ -1,0 +1,9 @@
+# Shell scripts must keep LF endings, or sh / Git Bash fail on Windows checkouts.
+*.sh                  text eol=lf
+**/scripts/kcli       text eol=lf
+**/scripts/kpy        text eol=lf
+**/scripts/kenv_info  text eol=lf
+*.py                  text eol=lf
+*.md                  text eol=lf
+*.kicad_dru           text eol=lf
+*.kicad_sym           text eol=lf

@@ -1,0 +1,44 @@
+(version 1)
+# JLCPCB multilayer (4/6 layers), 1 oz outer / 0.5 oz inner copper.
+# Source: jlcpcb.com/capabilities/pcb-capabilities (checked 2026-11-19). These are JLC's limits, not design targets:
+# design with the margins in reference_jlcpcb.md and set Board Setup -> Constraints as listed there
+# (silk-to-pad, text height/thickness and the mask web live there: a silk_clearance rule here also flags silk-to-silk).
+# Append project rules (net-class keep-aways etc.) below. Hand this file only to the final board, not to the router copy.
+
+(rule "JLC min track width"
+	(constraint track_width (min 0.09mm)))
+(rule "JLC min clearance"
+	(constraint clearance (min 0.09mm)))
+(rule "JLC SMD pad to pad"
+	(constraint clearance (min 0.15mm))
+	(condition "A.Type == 'Pad' && B.Type == 'Pad' && A.Pad_Type == 'SMD' && B.Pad_Type == 'SMD'"))
+(rule "JLC via hole (0.15 costs extra)"
+	(constraint hole_size (min 0.2mm))
+	(condition "A.Type == 'Via'"))
+(rule "JLC via diameter (below 0.45 costs extra)"
+	(constraint via_diameter (min 0.45mm)))
+(rule "JLC via annular ring"
+	(constraint annular_width (min 0.075mm))
+	(condition "A.Type == 'Via'"))
+(rule "JLC PTH annular ring (0.20 recommended)"
+	(constraint annular_width (min 0.15mm))
+	(condition "A.Type == 'Pad' && A.Pad_Type == 'Through-hole'"))
+(rule "JLC via hole to hole"
+	(constraint hole_to_hole (min 0.2mm)))
+(rule "JLC pad hole to pad hole"
+	(constraint hole_to_hole (min 0.45mm))
+	(condition "A.Type == 'Pad' && B.Type == 'Pad'"))
+(rule "JLC hole to copper"
+	(constraint hole_clearance (min 0.2mm)))
+(rule "JLC PTH to track (0.35 recommended)"
+	(constraint hole_clearance (min 0.28mm))
+	(condition "A.Type == 'Pad' && A.Pad_Type == 'Through-hole' && B.Type == 'Track'"))
+(rule "JLC inner layer PTH pad to copper"
+	(layer inner)
+	(constraint clearance (min 0.3mm))
+	(condition "A.Type == 'Pad' && A.Pad_Type == 'Through-hole'"))
+(rule "JLC min NPTH"
+	(constraint hole_size (min 0.5mm))
+	(condition "A.Type == 'Pad' && A.Pad_Type == 'NPTH, mechanical'"))
+(rule "JLC copper to routed edge"
+	(constraint edge_clearance (min 0.2mm)))

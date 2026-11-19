@@ -1,0 +1,3 @@
+#!/bin/sh
+# kpy script.py ARGS...  = KiCad's python (with pcbnew) on this machine (resolved by kenv.sh / the kicad-env-* skill)
+S=$(cd "$(dirname "$0")" && pwd); . "$S/kenv.sh"; kpy "$@"

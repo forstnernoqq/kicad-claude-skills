@@ -1,0 +1,6 @@
+#!/bin/sh
+# kenv_info: print which platform skill matched and what it resolved to.
+S=$(cd "$(dirname "$0")" && pwd); . "$S/kenv.sh"
+echo "platform: $KENV"; echo "freerouting jar: ${FR_JAR:-not found}"
+kcli version 2>/dev/null | tail -1
+kpy -c "import pcbnew,sys;print('pcbnew',pcbnew.Version(),'python',sys.version.split()[0])" 2>/dev/null | tail -1
